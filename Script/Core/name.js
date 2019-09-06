@@ -3,7 +3,7 @@
 (function(){
 
     function Init(){
-        console.log("Initialization start")
+        console.log("Initialization")
     }
     window.onload=Init;
 })();
