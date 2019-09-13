@@ -11,14 +11,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var object;
-(function (object) {
+var objects;
+(function (objects) {
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
-        function Button(imagePath, x, y) {
+        function Button(assetManager, imageString, x, y) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
-            var _this = _super.call(this, imagePath) || this;
+            var _this = _super.call(this, assetManager.getResult(imageString)) || this;
             _this.x = x;
             _this.y = y;
             _this.on("mouseover", _this.mouseOver);
@@ -34,6 +34,6 @@ var object;
         };
         return Button;
     }(createjs.Bitmap));
-    object.Button = Button;
-})(object || (object = {}));
+    objects.Button = Button;
+})(objects || (objects = {}));
 //# sourceMappingURL=button.js.map

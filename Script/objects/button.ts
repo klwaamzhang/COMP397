@@ -1,7 +1,7 @@
-module object{
+module objects{
     export class Button extends createjs.Bitmap{
-        constructor(imagePath:string,x:number=0,y:number=0){
-            super(imagePath);
+        constructor(assetManager:createjs.LoadQueue,imageString:string,x:number=0,y:number=0){
+            super(assetManager.getResult(imageString));
 
             this.x=x;
             this.y=y;
@@ -14,7 +14,7 @@ module object{
 
         //Methods
         private mouseOver():void {
-                this.alpha=0.7;
+            this.alpha=0.7;
                 
         }
 

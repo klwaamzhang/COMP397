@@ -1,58 +1,86 @@
 // immediate Invoked Anonymous Function
 
-(function(){
+(function () {
 
-    let canvas=document.getElementById("canvas");
-    let stage:createjs.Stage;
-    let helloLabel:object.Label;
-    let clickableButton:object.Button;
+    let canvas = document.getElementById("canvas");
+    let stage: createjs.Stage;
 
-    function Init(){
+    let assetManager: createjs.LoadQueue;
+    let assetManifest: any[];
+
+    let currentScene: objects.Scene;
+    let currentState: number;
+
+    assetManifest = [
+        { id: "backButton", src: "./Assets/BackButton.png" },
+        { id: "nextButton", src: "./Assets/NextButton.png" }
+    ]
+
+    function Init() {
         console.log("Initialization Start");
-        Start();       
+        //Start();
+
+        assetManager = new createjs.LoadQueue();
+        assetManager.installPlugin(createjs.Sound);
+        assetManager.loadManifest(assetManifest);
+        assetManager.on("complete", Start, this);
     }
 
-    function Start(){
+    function Start() {
         console.log("Starting Application...");
 
         //Initialize CreateJS
-        stage=new createjs.Stage(canvas);
-        stage.enableMouseOver(20); // Freqeuncy of checks
-        createjs.Ticker.framerate=60; // 60 FPS
+        stage = new createjs.Stage(canvas);
+        stage.enableMouseOver(20);
+        // Freqeuncy of checks
+        createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on("tick", Update);
+
+        objects.Game.currentScene = config.Scene.START;
+        currentState = config.Scene.START; // default state
+
         Main();
     }
 
-    function Update(){
+    function Update() {
+        // has my state changed since the lsdt check
+        if (currentState != objects.Game.currentScene) {
+            console.log("Changing scenes to " + objects.Game.currentScene);
+            Main();
+        }
+        currentScene.Update();
         stage.update();
-        helloLabel.rotation += 5;
     }
 
-    function clickableButtonMouseClick():void{
-        helloLabel.text="Clicked";
+    function clickableButtonMouseClick(): void {
         console.log("AHHHHH");
 
     }
 
-    function Main(){
+    function Main() {
         console.log("Game start...");
 
-        /*helloLabel=new createjs.Text("Hello World!", "40px Consolas", "#000000");
-        helloLabel.x=100;
-        helloLabel.y=100; */
+        //finite state machine
+        switch (objects.Game.currentScene) {
+            case config.Scene.START:
+                stage.removeAllChildren();
+                currentScene = new scenes.StartScene(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GAME:
+                stage.removeAllChildren();
+                currentScene = new scenes.PlayScene(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.OVER:
+                stage.removeAllChildren();
+                currentScene = new scenes.GameOverScene(assetManager);
+                stage.addChild(currentScene);
+                break;
+        }
 
-        helloLabel=new object.Label("hello World", "40 px","Consolas","#000000", 500,240,true);
-
-        stage.addChild(helloLabel);// Add the label to stage
-
-        //Button Initialization
-        clickableButton=new object.Button("./Assets/ClickMeButton.png", 320, 240);
-        clickableButton.regX=95;
-        clickableButton.regY=24.5;
-
-        clickableButton.on("click",clickableButtonMouseClick);
-        stage.addChild(clickableButton);
+        currentState=objects.Game.currentScene;
     }
 
-    window.onload=Init;
+    window.onload = Init;
 })();
