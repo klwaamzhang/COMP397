@@ -17,6 +17,8 @@
     }
     function Update() {
         stage.update();
+        helloLabel.scaleX += 0.001;
+        helloLabel.scaleY += 0.001;
     }
     function Main() {
         console.log("Game start...");
