@@ -12,7 +12,7 @@ module objects {
         // Functions
         // Initializing our variables with default values
         public Start(): void {
-            this.speedY = 5;
+            this.speedY = 0.5;
             this.Reset();
         }
 

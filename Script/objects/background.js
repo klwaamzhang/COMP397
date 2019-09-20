@@ -24,7 +24,7 @@ var objects;
         // Functions
         // Initializing our variables with default values
         Backgroud.prototype.Start = function () {
-            this.speedY = 5;
+            this.speedY = 0.5;
             this.Reset();
         };
         // Updated 60 times per seconds (60FPS)
