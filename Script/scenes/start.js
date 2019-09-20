@@ -21,16 +21,20 @@ var scenes;
             return _this;
         }
         StartScene.prototype.Start = function () {
-            this.welcomeLabel = new objects.Label("Welcome to School!", "60px", "Consolas", "#000000", 320, 240, true);
+            // Initialize the scene
+            this.background = new objects.Backgroud(this.assetManager);
+            this.welcomeLabel = new objects.Label("Welcome to School!", "60px", "Consolas", "#FFFFFF", 320, 240, true);
             this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 300);
             this.Main();
         };
         StartScene.prototype.Update = function () {
+            //this.background.Update();
         };
         StartScene.prototype.startButtonClick = function () {
             objects.Game.currentScene = config.Scene.GAME;
         };
         StartScene.prototype.Main = function () {
+            this.addChild(this.background);
             this.addChild(this.welcomeLabel);
             this.addChild(this.startButton);
             this.startButton.on("click", this.startButtonClick);
