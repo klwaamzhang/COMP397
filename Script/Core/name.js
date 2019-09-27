@@ -9,7 +9,8 @@
     assetManifest = [
         { id: "backButton", src: "./Assets/BackButton.png" },
         { id: "nextButton", src: "./Assets/NextButton.png" },
-        { id: "background", src: "./Assets/background.png" }
+        { id: "background", src: "./Assets/background.png" },
+        { id: "player", src: "./Assets/Spaceship.png" }
     ];
     function Init() {
         console.log("Initialization Start");
@@ -27,6 +28,9 @@
         // Freqeuncy of checks
         createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on("tick", Update);
+        // Create a global reference to our stage object
+        objects.Game.stage = stage;
+        // Set up default game stage
         objects.Game.currentScene = config.Scene.START;
         currentState = config.Scene.START; // default state
         Main();

@@ -20,13 +20,22 @@ var objects;
             _this.Start();
             return _this;
         }
-        Player.prototype.Start = function () { };
-        Player.prototype.Update = function () { };
+        // Methods
+        Player.prototype.Start = function () {
+            // set the initial position
+            this.y = 700;
+            this.x = 320;
+        };
+        Player.prototype.Update = function () {
+            this.Move();
+            this.CheckBound(); // <-- Check collisions
+        };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
-            // re reference the stage objects and get mouse position
-            // this.x = objects.Game.stage.mouseX;
-            // this
+            // We reference the stage object and get mouse position
+            this.x = objects.Game.stage.mouseX;
+            // this is evetually replaced with keyboard input
+            // Maybe xbox controller
         };
         Player.prototype.CheckBound = function () { };
         return Player;
