@@ -34,10 +34,10 @@ var objects;
         };
         Enemy.prototype.Reset = function () { };
         Enemy.prototype.Move = function () {
-            this.y += 0.5;
+            this.y += 5;
         };
         Enemy.prototype.CheckBound = function () {
-            if (this.y >= 900) {
+            if (this.y >= 900 + this.halfH + 5) {
                 this.y = -50;
             }
         };

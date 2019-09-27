@@ -19,10 +19,10 @@ module objects {
         }
         public Reset(): void { }
         public Move(): void {
-            this.y += 0.5;
+            this.y += 5;
         }
         public CheckBound(): void {
-            if (this.y >= 900) {
+            if (this.y >= 900 + this.halfH + 5) {
                 this.y = -50;
             }
         }
