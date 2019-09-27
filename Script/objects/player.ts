@@ -22,6 +22,15 @@ module objects {
             // this is evetually replaced with keyboard input
             // Maybe xbox controller
         }
-        public CheckBound(): void { }
+        public CheckBound(): void {
+            // right bound
+            if (this.x >= 640 - this.halfW) {
+                this.x = 640 - this.halfW;
+            }
+            // left bound
+            if (this.x <= this.halfW) {
+                this.x = this.halfW;
+            }
+        }
     }
 }
