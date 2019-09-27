@@ -25,20 +25,24 @@ var objects;
         // Methods
         Enemy.prototype.Start = function () {
             // set the initial position
-            this.y = -50;
-            this.x = 320;
+            //this.y = -50;
+            //this.x = 320;
+            this.Reset();
         };
         Enemy.prototype.Update = function () {
             this.Move();
             this.CheckBound(); // <-- Check collisions
         };
-        Enemy.prototype.Reset = function () { };
+        Enemy.prototype.Reset = function () {
+            this.x = Math.floor(Math.random() * 550) + 50;
+            this.y = Math.floor(Math.random() * -800) - 50;
+        };
         Enemy.prototype.Move = function () {
-            this.y += 5;
+            this.y += 3;
         };
         Enemy.prototype.CheckBound = function () {
             if (this.y >= 900 + this.halfH + 5) {
-                this.y = -50;
+                this.Reset();
             }
         };
         return Enemy;

@@ -23,19 +23,31 @@ var scenes;
         PlayScene.prototype.Start = function () {
             this.background = new objects.Backgroud(this.assetManager);
             this.player = new objects.Player(this.assetManager);
-            this.enemy = new objects.Enemy(this.assetManager);
+            //this.enemy=new objects.Enemy(this.assetManager);
+            this.enemies = new Array();
+            this.enemyNum = 5;
+            for (var i = 0; i < this.enemyNum; i++) {
+                this.enemies[i] = new objects.Enemy(this.assetManager);
+            }
             this.Main();
         };
         PlayScene.prototype.Update = function () {
             this.background.Update();
             this.player.Update();
-            this.enemy.Update();
+            //this.enemy.Update();
+            this.enemies.forEach(function (e) {
+                e.Update();
+            });
         };
         PlayScene.prototype.Main = function () {
+            var _this = this;
             // Order matters when adding game objects
             this.addChild(this.background);
             this.addChild(this.player);
-            this.addChild(this.enemy);
+            //this.addChild(this.enemy);
+            this.enemies.forEach(function (e) {
+                _this.addChild(e);
+            });
         };
         return PlayScene;
     }(objects.Scene));
